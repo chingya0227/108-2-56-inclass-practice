@@ -135,3 +135,21 @@ commit<-list(
 print(commit)
 ```
 
+```{r}
+`小明`<-list(
+  `108第一學期`=list(teacher1="Alice老師",course1="個體經濟學",score1="85分",
+                 teacher2="Mark老師",course2="總體經濟學",score2="73分"),
+  `108第二學期`=list(teacher1="Jason老師",course1="作業研究",score1="90分")
+)
+print(小明)
+```
+
+```{r}
+`天氣預報`<-list(
+  `台北市`=list(date1="2020-03-31",max1=25,min1=18,date2="2020-04-01",max2=25,min2=18),
+`新北市`=list(
+  date1="2020-03-31",max1=24,min1=15,date2="2020-04-01",max2=24,min2=15)
+)
+print(天氣預報)
+```
+
