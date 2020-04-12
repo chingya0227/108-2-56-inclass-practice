@@ -153,3 +153,122 @@ print(小明)
 print(天氣預報)
 ```
 
+```{r}
+save(commit,`天氣預報`,`小明`,`小明108學年課表D`,file = "today.Rda")
+```
+
+```{r}
+`小明的修課記錄` <- 
+  list(
+    name="小明",
+    semesters= list(`108-1`= list(year=108,semester=1,courses=list(
+                list(name="個體經濟學",teacher="Alice",grade=85),
+                list(name="總體經濟學",teacher="Mark",grade=78))),
+        `108-2`=list(year=108,semester=2,courses=list(
+                list(name="作業研究",teacher="Jason",grade=90
+                )
+              )
+            )
+      ) 
+    )
+
+```
+
+```{r}
+library(lubridate)
+```
+
+```{r}
+time1<-ymd_hms("2020-03-04T06:45:00Z")
+time2<-ymd_hms("2020-03-11 14:10:44",tz="Asia/Taipei")
+time3<-ymd_hms("2020-03-11 14:28:28",tz="Asia/Taipei")
+studientTime<-c(time1,time2,time3)
+studientTime
+```
+
+```{r}
+studentId <- c(410773002, 410773015)
+class(studentId)
+as.character(studentId)
+```
+
+```{r}
+vectorExample <- c("小明","小英","大雄")
+
+# 有多少位置可選：
+length(vectorExample)
+```
+
+```{r}
+vectorExample[[1]]
+vectorExample[[3]]
+```
+
+```{r}
+listExample <- 
+  list(
+    student="小明",
+    `學期`=list(
+      `108-1`=list(
+        list(
+          name="個體經濟學",
+          teacher="Alice",
+          grade=85
+        )
+      ),
+      `108-2`=list(
+        list(
+          name="總體經濟學",
+          teacher="Mark",
+          grade=78
+        )
+      )
+    )
+  )
+# 有多少位置可選：
+length(listExample)
+```
+
+```{r}
+listExample[[1]]
+listExample[[2]]
+```
+
+```{r}
+library(jsonlite)
+fromJSON("https://data.tainan.gov.tw/dataset/4cd9345a-04bf-4328-a97d-314ff78b4763/resource/afc025fc-1ef4-447c-b785-a680391d0ca1/download/tnsport2.json", simplifyDataFrame = F) -> tainanSportsMap
+
+length(tainanSportsMap)
+```
+
+```{r}
+tainanSportsMap[[1]]
+```
+
+```{r}
+# 有多少名字可選：
+names(listExample)
+```
+
+```{r}
+listExample$student
+listExample$`學期` # 特殊命名依然要用反頓點呼叫
+```
+
+```{r}
+listExample[["student"]]
+listExample$student
+
+listExample[["學期"]] # 小心不是反頓點喔。
+listExample$`學期`
+```
+
+```{r}
+fromJSON("http://data.ntpc.gov.tw/api/v1/rest/datastore/382000000A-000157-002",
+         simplifyDataFrame = F) -> newTaipeiCityVaccine
+
+str(newTaipeiCityVaccine)
+length(newTaipeiCityVaccine)
+names(newTaipeiCityVaccine)
+```
+
