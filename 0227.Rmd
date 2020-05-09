@@ -779,3 +779,48 @@ str_detect("aecfg", letters)
 str_detect(fruit, "^p", negate = TRUE)
 ```
 
+```{r}
+str(example)
+pick_above170 <- example$height >= 170
+pick_bloodB <- example$bloodType == "B"
+pick_loveFood <- 
+  stringr::str_detect(example$hobby,"美食")
+pick_na <- is.na(example$weight)
+pick_after98 <- 
+  example$birthday >= lubridate::ymd("1998-01-01")
+set_TaipeiMetro <- c("Taipei","New Taipei")
+pick_fromTaipeiMetro <- 
+  example$residence %in% set_TaipeiMetro
+```
+
+```{r}
+str(example[c("name","hobby","bloodType")])
+
+example$name[
+    pick_loveFood & pick_bloodB
+  ]
+```
+
+```{r}
+example[c("name","birthday","residence")]
+
+example$name[
+  pick_after98 | !pick_fromTaipeiMetro
+]
+```
+
+```{r}
+example$name[
+  pick_after98 & pick_fromTaipeiMetro & pick_bloodB
+]
+```
+
+```{r}
+library(stringr)
+library(glue)
+```
+
+```{r}
+
+```
+
