@@ -1030,6 +1030,97 @@ str_extract_all(
 ```
 
 ```{r}
+Date <-"康熙23年5月6日"
+regex_pattern <-
+  "(?<=康熙)[0-9]+(?=年)"
+year <- 
+  str_extract(
+    Date,
+    regex_pattern)
+westernYear <- as.integer(year)+1662
+str_replace(
+  Date,
+  regex_pattern,  # 要換掉的文字
+  as.character(westernYear) # 要替換的內容
+) -> Date_reformat
+print(Date_reformat)
+lubridate::ymd(Date_reformat)->Date_reformat90
+class(Date_reformat)
+```
+
+```{r}
+char4 <- c("Wild","Apple","Donald","May") 
+factor(char4)
+
+char3 <- c("蔡英文","習近平","Donald Trump") -> G3
+factor(char3)
+```
+
+```{r}
+jsonlite::fromJSON("https://od.cdc.gov.tw/eic/Day_Confirmation_Age_County_Gender_19CoV.json") -> covid19
+```
+
+```{r}
+# 不可排序類別：性別、縣市、是否境外移入
+covid19$縣市 <- 
+  factor(covid19$縣市)
+covid19$性別 <-
+  factor(covid19$性別)
+covid19$是否為境外移入 <-
+  factor(
+    covid19$是否為境外移入
+  )
+# 可排序類別資料：年齡層
+covid19$年齡層 <-
+  factor(
+    covid19$年齡層,
+    ordered=TRUE
+  )
+
+levels(covid19$縣市)
+levels(covid19$性別)
+levels(covid19$是否為境外移入)
+covid19$年齡層
+levels(covid19$年齡層)
+```
+
+```{r}
+levels(covid19$性別)
+covid19$性別 <- factor(covid19$性別, c("男","女"))
+```
+
+```{r}
+jsonlite::fromJSON(
+  "https://www.dropbox.com/s/jckqryeh5zeat5w/regionPopulation.json?dl=1"
+) -> population
+unlist(population) -> population
+```
+
+```{r}
+print(population)
+class(population) # 判斷出是named integer vector
+names(population) # 元素名稱是台灣各縣市
+levels(covid19$縣市) # 是名稱字串向量
+
+# 由於population元素值有names，可以用`[名稱字串向量]`取出所要的
+levels(covid19$縣市) -> levelsInData
+population[levelsInData] -> population
+
+population <- sort(population, decreasing=T)
+population
+
+newLevels <- names(population)
+newLevels
+
+covid19$縣市 <-
+  factor(
+    covid19$縣市, levels=newLevels
+  )
+
+levels(covid19$縣市)
+```
+
+```{r}
 
 ```
 
